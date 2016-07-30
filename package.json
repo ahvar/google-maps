@@ -1,0 +1,21 @@
+{
+  "name": "google-maps-api-project",
+  "version": "0.0.1",
+  "description": "a practice project for google api",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "google",
+    "maps",
+    "api",
+    "udacity"
+  ],
+  "devDependencies": {
+    "http-server": "^0.9.0",
+    "ngrok": "^2.2.2"
+  },
+  "author": "Arthur Vargas",
+  "license": "ISC"
+}
