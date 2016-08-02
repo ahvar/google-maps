@@ -7,7 +7,7 @@ API Course, Lesson 1 -->
  <!-- styles put here, but you can include a CSS file and reference it instead! -->
    <style type="text/css">
      html, body { height: 100%; margin: 0; padding: 0; }
-     #map { height: 100%; }
+     #mapMX { height: 100%; }
    </style>
  </head>
  <body>
@@ -18,110 +18,13 @@ API Course, Lesson 1 -->
    <input id="btnHyb" type="button" value="Hybrid">
    <input id="btnTer" type="button" value="Terrain">
    <!-- TODO 1: Create a place to put the map in the HTML-->
-   <div id="map"> 
-   </div>
-   <script>
-     // TODO: Create a map variable
-     var map;
-     // TODO: Complete the following function to initialize the map
-     function initMap() {
-      google.maps.visualRefresh = true;
-      var mapOptions = {
-      zoom: 10,
-      center: new google.maps.LatLng(19.4326,-99.133208),
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      mapTypeControl: true,
-      mapTypeControlOptions: {
-        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-        position: google.maps.ControlPosition.BOTTOM_CENTER
-      },
-      panControl:true,
-      panControlOptions: {
-        position: google.maps.ControlPosition.TOP_RIGHT
-      },
-      zoomControl: true,
-      zoomControlOptions: {
-        style: google.maps.ZoomControlStyle.LARGE,
-        position: google.maps.ControlPosition.LEFT_CENTER
-      }
-     }
-       // TODO: use a constructor to create a new map JS object. You can use the coordinates
-       // we used, 40.7413549, -73.99802439999996 or your own!
-       map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-       //this code block will check whether the browser supports Geolocation API and sets the center
-       //of the map according to the coordinates of the device
-       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          function(position) {
-          var lat = position.coords.latitude;
-          var lng = position.coords.longitude;
-          //Creating LatLng object with latitude and longitude
-          var devCenter = new google.maps.LatLng(lat,lng);
-          map.setCenter(devCenter);
-          map.setZoom(15);
-        });
-       }
-       startButtonEvents();
-       var geocoder = new google.maps.Geocoder;
-       var morelia = {lat: 19.705950, lng: -101.194982};
-       var df = {lat: 19.432608, lng: -99.133208};
-       geocoder.geocode({'address': 'Ucareo',}, function(results,status) {
-          if (status === 'OK') {
-            map.setCenter(results[0].geometry.location);
-            new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-            });
-            new google.maps.Marker({
-              map: map,
-              position: morelia
-            });
-            new google.maps.Marker({
-              map: map,
-              position: df
-            });
-
-          } else {
-            window.alert('Google was not successful for the following reason: ' + status);
-          }
-       });
-      }
-
-      //this puts the map center at Districto Federal, MX
-      function zoomToDF() {
-        var df = new google.maps.LatLng(19.4326,-99.133208);
-        map.setCenter(df);
-      }
-      //this zooms the map to a street view
-      function zoomToStreet() {
-        map.setZoom(22);
-      }
-
-      function startButtonEvents() {
-        document.getElementById('btnZoomToDF').addEventListener('click',function() {
-          zoomToDF(); 
-        });
-        document.getElementById('btnZoomToStr').addEventListener('click',function(){
-          zoomToStreet();
-        });
-        document.getElementById('btnRoad').addEventListener('click',function(){
-          map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-        });
-        document.getElementById('btnSat').addEventListener('click',function(){
-          map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-        });
-        document.getElementById('btnHyb').addEventListener('click',function() {
-          map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-        });
-        document.getElementById('btnTer').addEventListener('click',function(){
-          map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
-        });
-      }
-   </script>
+   <div id="mapMX"></div>
+   <div id="mapUSA"></div>
+   <script src="scripts/map-styles.js"></script>
+   <script src="scripts/maps.js"></script>
    <!--TODO: Load the JS API ASYNCHRONOUSLY below.-->
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgy9M6bmPlYNu6rBZHs9F85rMw6g_OHwQ&region=MX&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgy9M6bmPlYNu6rBZHs9F85rMw6g_OHwQ&region=MX&callback=initMXMap">
     </script>
  </body>
 </html>
