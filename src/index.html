@@ -11,11 +11,15 @@ API Course, Lesson 1 -->
    </style>
  </head>
  <body>
+   <input id="btnZoomToDF" type="button" value="Zoom To Districto Federal">
+   <input id="btnZoomToStr" type="button" value="Zoom To Street Level">
+   <input id="btnRoad" type="button" value="Road Map">
+   <input id="btnSat" type="button" value="Satelitte">
+   <input id="btnHyb" type="button" value="Hybrid">
+   <input id="btnTer" type="button" value="Terrain">
    <!-- TODO 1: Create a place to put the map in the HTML-->
    <div id="map"> 
    </div>
-   <input id="btnZoomToDF" type="button" value="Zoom To Districto Federal">
-   <input id="btnZoomToStr" type="button" value="Zoom To Street Level">
    <script>
      // TODO: Create a map variable
      var map;
@@ -91,17 +95,29 @@ API Course, Lesson 1 -->
       }
       //this zooms the map to a street view
       function zoomToStreet() {
-        map.setZoom(18);
-      }
-      function startButtonEvents() {
-        document.getElementById('btnZoomToDF').addEventListener('click',function() {
-          zoomToDF();
-        });
-        document.getElementById('btnZoomToStr').addEventListener('click',function(){
-          zooomToStreet();
-        });
+        map.setZoom(22);
       }
 
+      function startButtonEvents() {
+        document.getElementById('btnZoomToDF').addEventListener('click',function() {
+          zoomToDF(); 
+        });
+        document.getElementById('btnZoomToStr').addEventListener('click',function(){
+          zoomToStreet();
+        });
+        document.getElementById('btnRoad').addEventListener('click',function(){
+          map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+        });
+        document.getElementById('btnSat').addEventListener('click',function(){
+          map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+        });
+        document.getElementById('btnHyb').addEventListener('click',function() {
+          map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+        });
+        document.getElementById('btnTer').addEventListener('click',function(){
+          map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+        });
+      }
    </script>
    <!--TODO: Load the JS API ASYNCHRONOUSLY below.-->
     <script async defer
